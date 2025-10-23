@@ -1,1 +1,14 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@tailwind utilities;
+@tailwind utilities;
+
+:root {
+  --color-background: #F8FAFB;
+  --color-primary: #ECEFF1;
+  --color-icons: #0A3D62;
+  --color-secondary: #73B7C3;
+  --button-primary: #73B7C3;
+  --color-border: #334155;
+  --color-text: #1E293B;
+  --color-bg-form: #49AEDD;
+}
