@@ -1,5 +1,5 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 :root {
@@ -11,4 +11,14 @@
   --color-border: #334155;
   --color-text: #1E293B;
   --color-bg-form: #49AEDD;
+  --color-hover: #49AEDD;
+
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
 }
