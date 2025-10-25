@@ -41,22 +41,29 @@ export default function Header() {
           <img src={Logo} alt="Studio Pet Care" />
 
           <nav className="flex items-center space-x-12">
-            <a href="/inicio" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">
+            <a href="/" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">
               Início
             </a>
 
             <div
               ref={containerRef}
-              className="relative"
+              className="relative group"
               onMouseEnter={handleEnter}
               onMouseLeave={handleLeave}
             >
               <button
                 onClick={handleButtonClick}
-                className="inline-flex items-center text-[18px] text-(--color-text) hover:text-(--color-hover)"
+                className="inline-flex items-center text-[18px] text-(--color-text) hover:text-(--color-hover) transition-colors"
               >
                 <span>Serviços</span>
-                <svg className="ml-1.5 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <svg
+                  className={`ml-1.5 w-4 h-4 transform transition-transform duration-300 ease-in-out ${
+                    isOpen ? "rotate-180" : "group-hover:rotate-180"
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
                   <path d="M6 9L12 15L18 9" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </button>
@@ -83,7 +90,7 @@ export default function Header() {
             <a href="/contato" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">Contato</a>
           </nav>
 
-          <button className="bg-(--button-primary) text-(--color-text) text-[18px] px-8 py-2 rounded-md hover:bg-(--color-hover) cursor-pointer">
+          <button className="bg-(--button-primary) text-(--color-text) text-[18px] px-8 py-2 rounded-md hover:bg-(--color-hover) cursor-pointer transition-colors">
             Agendar agora
           </button>
         </div>
