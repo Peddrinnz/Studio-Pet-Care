@@ -12,8 +12,18 @@ const servicos = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleEnter = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -24,24 +34,35 @@ export default function Header() {
     closeTimer.current = setTimeout(() => setIsOpen(false), 140)
   }
 
-  const handleButtonClick = () => setIsOpen((s) => !s)
-
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!containerRef.current?.contains(e.target as Node)) setIsOpen(false)
-    }
-    document.addEventListener("mousedown", onDocClick)
-    return () => document.removeEventListener("mousedown", onDocClick)
-  }, [])
-
   return (
-    <header className="bg-(--color-background) border-b border-(--color-border)/20 shadow-sm">
+     <header className={`fixed top-0 left-0 right-0 z-50 bg-(--color-background) border-b border-(--color-border)/30 transition-all duration-300 ${
+      isScrolled ? 'shadow-md' : ''
+    }`}>
       <div className="max-w-[1440px] mx-auto">
-        <div className="flex items-center justify-between h-24 px-8">
-          <img src={Logo} alt="Studio Pet Care" />
+        <div className="flex items-center justify-between h-16 px-4 lg:px-8">
+          <img src={Logo} alt="Studio Pet Care" className="h-16 w-auto" />
 
-          <nav className="flex items-center space-x-12">
-            <a href="/" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+
+          <nav className="hidden lg:flex items-center space-x-8">
+            <a href="/" className="text-base text-(--color-text) hover:text-(--color-hover)">
               Início
             </a>
 
@@ -51,14 +72,11 @@ export default function Header() {
               onMouseEnter={handleEnter}
               onMouseLeave={handleLeave}
             >
-              <button
-                onClick={handleButtonClick}
-                className="inline-flex items-center text-[18px] text-(--color-text) hover:text-(--color-hover) transition-colors"
-              >
+              <button className="inline-flex items-center text-base hover:text-(--color-hover)">
                 <span>Serviços</span>
                 <svg
-                  className={`ml-1.5 w-4 h-4 transform transition-transform duration-300 ease-in-out ${
-                    isOpen ? "rotate-180" : "group-hover:rotate-180"
+                  className={`ml-1.5 w-4 h-4 transform transition-transform duration-300 ${
+                    isOpen ? "rotate-180" : ""
                   }`}
                   viewBox="0 0 24 24"
                   fill="none"
@@ -69,13 +87,13 @@ export default function Header() {
               </button>
 
               {isOpen && (
-                <div className="absolute top-full left-0 mt-0 w-48 bg-(--color-primary) rounded-md shadow-lg z-50">
-                  <div className="py-2 divide-y divide-gray-100">
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg">
+                  <div className="py-2">
                     {servicos.map((item) => (
                       <a
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-sm text-(--color-text) hover:bg-(--color-hover)/10"
+                        className="block px-4 py-2 text-sm hover:bg-(--color-hover)/10"
                       >
                         {item.label}
                       </a>
@@ -85,14 +103,51 @@ export default function Header() {
               )}
             </div>
 
-            <a href="/galeria" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">Galeria</a>
-            <a href="/sobre" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">Sobre</a>
-            <a href="/contato" className="text-[18px] text-(--color-text) hover:text-(--color-hover)">Contato</a>
+            <a href="/galeria" className="text-base hover:text-(--color-hover)">
+              Galeria
+            </a>
+            <a href="/sobre" className="text-base hover:text-(--color-hover)">
+              Sobre
+            </a>
+            <a href="/contato" className="text-base hover:text-(--color-hover)">
+              Contato
+            </a>
           </nav>
 
-          <button className="bg-(--button-primary) text-(--color-text) text-[18px] px-8 py-2 rounded-md hover:bg-(--color-hover) cursor-pointer transition-colors">
+          <button className="hidden lg:block bg-(--button-primary) text-base px-6 py-2 rounded-md hover:bg-(--color-hover) transition-colors cursor-pointer">
             Agendar agora
           </button>
+
+          {isMobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 right-0 bg-(--color-background) border-b border-(--color-border)/30 shadow-lg">
+              <nav className="flex flex-col py-4">
+                <a href="/" className="px-4 py-2 text-base hover:bg-(--color-hover)/10">
+                  Início
+                </a>
+                {servicos.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="px-4 py-2 text-base hover:bg-(--color-hover)/10"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <a href="/galeria" className="px-4 py-2 text-base hover:bg-(--color-hover)/10">
+                  Galeria
+                </a>
+                <a href="/sobre" className="px-4 py-2 text-base hover:bg-(--color-hover)/10">
+                  Sobre
+                </a>
+                <a href="/contato" className="px-4 py-2 text-base hover:bg-(--color-hover)/10">
+                  Contato
+                </a>
+                <button className="mx-4 mt-4 bg-(--button-primary) text-base px-6 py-2 rounded-md hover:bg-(--color-hover) transition-colors">
+                  Agendar agora
+                </button>
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </header>
