@@ -5,13 +5,17 @@ export default function Hero() {
   return (
     <section className="relative h-[650px] overflow-hidden">
       <div 
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 hidden md:block"
         style={{
           backgroundImage: `url(${catImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'right center',
           filter: 'brightness(0.9) saturate(1.4)',
         }}
+      />
+      
+      <div 
+        className="absolute inset-0 z-0 md:hidden bg-(--color-bg-form)"
       />
 
       <div className="relative z-20 max-w-[1440px] mx-auto h-full flex items-center">
