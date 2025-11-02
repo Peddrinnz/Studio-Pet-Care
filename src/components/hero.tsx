@@ -3,7 +3,7 @@ import { FaBone, FaPaw } from 'react-icons/fa6';
 
 export default function Hero() {
   return (
-    <section className="relative h-[600px] overflow-hidden">
+    <section className="relative h-[650px] overflow-hidden">
       <div 
         className="absolute inset-0 z-0"
         style={{

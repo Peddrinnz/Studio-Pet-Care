@@ -4,6 +4,7 @@ import Services from "./components/services";
 import Veterinary from "./components/veterinary";
 import Reviews from "./components/reviews";
 import Form from "./components/form";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Veterinary />
       <Reviews />
       <Form />
+      <Footer />
     </div>
   )
 }
