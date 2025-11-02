@@ -22,7 +22,7 @@ export default function Hero() {
           <p className="text-xl mb-8 font-regular">
             Banho | Tosa | Consultas
           </p>
-          <button className="bg-(--button-primary) text-(--color-primary) px-8 py-3 rounded-md hover:bg-(--color-hover) transition-colors cursor-pointer">
+          <button className="bg-(--button-primary) px-8 py-3 rounded-md hover:bg-(--color-hover) transition-colors cursor-pointer">
             Agendar horário
           </button>
         </div>

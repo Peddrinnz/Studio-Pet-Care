@@ -2,6 +2,7 @@ import Header from "./components/header";
 import Hero from "./components/hero";
 import Services from "./components/services";
 import Veterinary from "./components/veterinary";
+import Reviews from "./components/reviews";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Services />
       <Veterinary />
+      <Reviews />
     </div>
   )
 }

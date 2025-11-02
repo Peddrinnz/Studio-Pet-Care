@@ -50,16 +50,16 @@ export default function Veterinary() {
             <div 
               className="relative overflow-hidden"
               style={{
-                clipPath: "ellipse(100% 52% at 38% 50%)"
+                clipPath: "ellipse(100% 51% at 45% 51%)"
               }}
             >
               <img
                 src={doctorImage}
                 alt="Veterinário com cachorro"
-                className="w-full h-full object-cover object-bottom"
+                className="w-full h-full object-cover"
                 style={{
                   transform: "scale(1.0)",
-                  transformOrigin: "bottom center"
+                  transformOrigin: "bottom center",
                 }}
               />
             </div>

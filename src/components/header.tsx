@@ -34,13 +34,22 @@ export default function Header() {
     closeTimer.current = setTimeout(() => setIsOpen(false), 140)
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
      <header className={`fixed top-0 left-0 right-0 z-50 bg-(--color-background) border-b border-(--color-border)/30 transition-all duration-300 ${
       isScrolled ? 'shadow-md' : ''
     }`}>
       <div className="max-w-[1440px] mx-auto">
         <div className="flex items-center justify-between h-16 px-4 lg:px-8">
-          <img src={Logo} alt="Studio Pet Care" className="h-16 w-auto" />
+          <button 
+            onClick={scrollToTop} 
+            className="cursor-pointer focus:outline-none"
+          >
+            <img src={Logo} alt="Studio Pet Care" className="h-16 w-auto" />
+          </button>
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
